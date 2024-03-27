@@ -1,6 +1,7 @@
 package Pages;
 
 import Helpers.Waits;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -15,7 +16,7 @@ public class ProductsPage {
     List<Double> pricesBeforeFilter = new ArrayList<>();
 
 
-    public ProductsPage(WebDriver driver){
+    public ProductsPage(WebDriver driver) {
         this.driver = driver;
     }
 
@@ -37,72 +38,76 @@ public class ProductsPage {
         Waits.getExplicitWait(driver).until(ExpectedConditions.elementToBeClickable(logoutLink));
     }
 
-    public boolean verifyProductsPage(){
+    public boolean verifyProductsPage() {
         Waits.getExplicitWait(driver).until(ExpectedConditions.visibilityOfElementLocated(pageTitle));
         boolean productsTitle = driver.findElement(pageTitle).isDisplayed();
         return productsTitle;
     }
 
-    public boolean checkInitialSorting(){
+    public boolean checkInitialSorting() {
         List<WebElement> productNamesAfterLogin = driver.findElements(productsNames);
         List<String> productsNamesList = new ArrayList<>();
-        for(WebElement element:productNamesAfterLogin) {
+        for (WebElement element : productNamesAfterLogin) {
             productsNamesList.add(String.valueOf(element.getText()));
         }
-            List<String> productsNameListSorted = new ArrayList<>(productsNamesList);
-            Collections.sort(productsNameListSorted);
-            return productsNamesList.equals(productsNameListSorted);
-        }
+        List<String> productsNameListSorted = new ArrayList<>(productsNamesList);
+        Collections.sort(productsNameListSorted);
+        return productsNamesList.equals(productsNameListSorted);
+    }
 
-        public void filterByPricesLowToHigh() {
-            List<WebElement> priceElement = driver.findElements(productPrices);
-            for (WebElement element : priceElement) {
-                pricesBeforeFilter.add(Double.valueOf(element.getText().replace("$", "")));
-                System.out.println(element.getText());
-            }
-            Select dropdown = new Select(driver.findElement(filter));
-            dropdown.selectByVisibleText("Price (low to high)");
+    public void filterByPricesLowToHigh() {
+        List<WebElement> priceElement = driver.findElements(productPrices);
+        for (WebElement element : priceElement) {
+            pricesBeforeFilter.add(Double.valueOf(element.getText().replace("$", "")));
+            System.out.println(element.getText());
         }
+        Select dropdown = new Select(driver.findElement(filter));
+        dropdown.selectByVisibleText("Price (low to high)");
+    }
 
-        public boolean verifySortingByPriceDescending(){
-            List<WebElement> priceElementFiltered = driver.findElements(productPrices);
-            List<Double> pricesAfterFilter = new ArrayList<>();
-            for (WebElement element : priceElementFiltered) {
-                pricesAfterFilter.add(Double.valueOf(element.getText().replace("$", "")));
-                System.out.println(element.getText());
-            }
-            Collections.sort(pricesBeforeFilter);
-            return pricesBeforeFilter.equals(pricesAfterFilter);
+    public boolean verifySortingByPriceDescending() {
+        List<WebElement> priceElementFiltered = driver.findElements(productPrices);
+        List<Double> pricesAfterFilter = new ArrayList<>();
+        for (WebElement element : priceElementFiltered) {
+            pricesAfterFilter.add(Double.valueOf(element.getText().replace("$", "")));
+            System.out.println(element.getText());
         }
+        Collections.sort(pricesBeforeFilter);
+        return pricesBeforeFilter.equals(pricesAfterFilter);
+    }
 
-        public void clickOnAddToCartButtonOnesieProduct(){
+    public void clickOnAddToCartButtonOnesieProduct() {
+        Assert.assertTrue(driver.findElement(productOnesieAddToCart).isEnabled());
         driver.findElement(productOnesieAddToCart).click();
-        }
+    }
 
-        public void clickOnAddToCartButtonBackpackProduct() {
+    public void clickOnAddToCartButtonBackpackProduct() {
+        Assert.assertTrue(driver.findElement(productBackpackAddToCart).isEnabled());
         driver.findElement(productBackpackAddToCart).click();
-        }
+    }
 
-        public Integer verifyCartBadgeQuantity(){
-            return Integer.parseInt(driver.findElement(shoppingCartBadge).getText());
-        }
+    public Integer verifyCartBadgeQuantity() {
+        return Integer.parseInt(driver.findElement(shoppingCartBadge).getText());
+    }
 
-        public void clickRemoveForBackPackProduct() {
+    public void clickRemoveForBackPackProduct() {
+        Assert.assertTrue(driver.findElement(productBackpackRemove).isEnabled());
         driver.findElement(productBackpackRemove).click();
-        }
+    }
 
-        public boolean verifyCartBadgePresence(){
+    public boolean verifyCartBadgePresence() {
 
         try {
-             driver.findElement(shoppingCartBadge);
-             return true;
-        }catch(Exception e) {
+            driver.findElement(shoppingCartBadge);
+            return true;
+        } catch (Exception e) {
             System.out.println("Exception thrown - counter is not present");
         }
         return false;
     }
 
-    public void clickOnCartButton(){
+    public void clickOnCartButton() {
+        Assert.assertTrue(driver.findElement(shoppingCartButton).isEnabled());
         driver.findElement(shoppingCartButton).click();
     }
 }

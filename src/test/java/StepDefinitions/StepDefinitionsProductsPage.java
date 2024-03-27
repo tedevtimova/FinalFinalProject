@@ -4,7 +4,7 @@ import Pages.ProductsPage;
 import io.cucumber.java.en.*;
 import org.junit.Assert;
 
-import static StepDefinitions.Hooks.driver;
+import static Helpers.Hooks.driver;
 
 public class StepDefinitionsProductsPage {
 

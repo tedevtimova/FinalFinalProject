@@ -1,4 +1,4 @@
-package StepDefinitions;
+package Helpers;
 
 import Helpers.BrowserFactory;
 import io.cucumber.java.After;

@@ -5,7 +5,7 @@ import io.cucumber.java.en.*;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 
-import static StepDefinitions.Hooks.driver;
+import static Helpers.Hooks.driver;
 
 public class StepDefinitionsLoginPage {
 

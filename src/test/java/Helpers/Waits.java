@@ -5,8 +5,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class Waits {
 
-    public static WebDriverWait getExplicitWait(WebDriver driver){
-        return new WebDriverWait(driver,4);
+    public static WebDriverWait getExplicitWait(WebDriver driver) {
+        return new WebDriverWait(driver, 4);
 
     }
 }
