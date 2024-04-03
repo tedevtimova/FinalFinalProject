@@ -10,32 +10,39 @@ import org.openqa.selenium.support.ui.Select;
 
 import java.util.*;
 
+import static Helpers.Hooks.driver;
+
 public class ProductsPage {
 
     private WebDriver driver;
-    List<Double> pricesBeforeFilter = new ArrayList<>();
 
+    List<Double> pricesBeforeFilter = new ArrayList<>();
 
     public ProductsPage(WebDriver driver) {
         this.driver = driver;
     }
 
     By pageTitle = By.className("title");
-    By shoppingCartButton = By.id("shopping_cart_container");
+    By shoppingCartButtonLocator = By.id("shopping_cart_container");
     By shoppingCartBadge = By.className("shopping_cart_badge");
-    By burgerMenu = By.id("react-burger-menu-btn");
-    By logoutLink = By.linkText("Logout");
+    By burgerMenuLocator = By.id("react-burger-menu-btn");
+    By logoutLinkLocator = By.linkText("Logout");
     By productsNames = By.className("inventory_item_name");
     By filter = By.className("product_sort_container");
     By productPrices = By.className("inventory_item_price");
-    By productOnesieAddToCart = By.id("add-to-cart-sauce-labs-onesie");
-    By productBackpackAddToCart = By.id("add-to-cart-sauce-labs-backpack");
-    By productBackpackRemove = By.id("remove-sauce-labs-backpack");
+    By productOnesieAddToCartLocator = By.id("add-to-cart-sauce-labs-onesie");
+    By productBackpackAddToCartLocator = By.id("add-to-cart-sauce-labs-backpack");
+    By productBackpackRemoveLocator = By.id("remove-sauce-labs-backpack");
+
 
     public void verifyLogin() {
+        WebElement burgerMenu = driver.findElement(burgerMenuLocator);
         Waits.getExplicitWait(driver).until(ExpectedConditions.elementToBeClickable(burgerMenu));
-        driver.findElement(burgerMenu).click();
-        Waits.getExplicitWait(driver).until(ExpectedConditions.elementToBeClickable(logoutLink));
+        burgerMenu.click();
+        Waits.getExplicitWait(driver).until(ExpectedConditions.elementToBeClickable(logoutLinkLocator));
+        WebElement logoutLink = driver.findElement(logoutLinkLocator);
+        Assert.assertTrue("Logout link is not displayed", logoutLink.isDisplayed());
+
     }
 
     public boolean verifyProductsPage() {
@@ -77,13 +84,15 @@ public class ProductsPage {
     }
 
     public void clickOnAddToCartButtonOnesieProduct() {
-        Assert.assertTrue(driver.findElement(productOnesieAddToCart).isEnabled());
-        driver.findElement(productOnesieAddToCart).click();
+        WebElement productOnesieAddToCart = driver.findElement(productOnesieAddToCartLocator);
+        Assert.assertTrue("Product is not displayed", productOnesieAddToCart.isEnabled());
+        productOnesieAddToCart.click();
     }
 
     public void clickOnAddToCartButtonBackpackProduct() {
-        Assert.assertTrue(driver.findElement(productBackpackAddToCart).isEnabled());
-        driver.findElement(productBackpackAddToCart).click();
+        WebElement productBackpackAddToCart = driver.findElement(productBackpackAddToCartLocator);
+        Assert.assertTrue("Product is not displayed", productBackpackAddToCart.isEnabled());
+        productBackpackAddToCart.click();
     }
 
     public Integer verifyCartBadgeQuantity() {
@@ -91,8 +100,9 @@ public class ProductsPage {
     }
 
     public void clickRemoveForBackPackProduct() {
-        Assert.assertTrue(driver.findElement(productBackpackRemove).isEnabled());
-        driver.findElement(productBackpackRemove).click();
+        WebElement productBackpackRemove = driver.findElement(productBackpackRemoveLocator);
+        Assert.assertTrue("Remove button is not available", productBackpackRemove.isEnabled());
+        productBackpackRemove.click();
     }
 
     public boolean verifyCartBadgePresence() {
@@ -107,8 +117,9 @@ public class ProductsPage {
     }
 
     public void clickOnCartButton() {
-        Assert.assertTrue(driver.findElement(shoppingCartButton).isEnabled());
-        driver.findElement(shoppingCartButton).click();
+        WebElement shoppingCartButton = driver.findElement(shoppingCartButtonLocator);
+        Assert.assertTrue("Shopping cart button is not available", shoppingCartButton.isEnabled());
+        shoppingCartButton.click();
     }
 }
 

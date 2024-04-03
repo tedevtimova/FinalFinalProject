@@ -11,13 +11,13 @@ public class Hooks {
     public static WebDriver driver;
 
     @Before
-    public void startBrowser(){
+    public void startBrowser() {
         driver = BrowserFactory.getDriver();
     }
 
     @After
-    public void closeBrowser(){
-        if(driver!=null) {
+    public void closeBrowser() {
+        if (driver != null) {
             BrowserFactory.closeBrowser();
         }
     }

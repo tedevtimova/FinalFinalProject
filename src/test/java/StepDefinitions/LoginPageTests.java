@@ -1,13 +1,13 @@
 package StepDefinitions;
+
 import Pages.LoginPage;
 import Pages.ProductsPage;
 import io.cucumber.java.en.*;
 import org.junit.Assert;
-import org.openqa.selenium.By;
 
 import static Helpers.Hooks.driver;
 
-public class StepDefinitionsLoginPage {
+public class LoginPageTests {
 
     LoginPage loginPage = new LoginPage(driver);
     ProductsPage productsPage = new ProductsPage(driver);
@@ -18,19 +18,19 @@ public class StepDefinitionsLoginPage {
     }
 
     @When("the user enters invalid {string} and {string}")
-    public void the_user_enters_invalid_and(String string, String string2) {
-        loginPage.enterUsername(string);
-        loginPage.enterPassword(string2);
+    public void the_user_enters_invalid_and(String username, String password) {
+        loginPage.enterUsername(username);
+        loginPage.enterPassword(password);
     }
 
     @And("clicks on the Login button")
     public void clicks_on_the_Login_button() {
-     loginPage.clickOnLogin();
+        loginPage.clickOnLogin();
     }
 
     @Then("the login should be unsuccessful and the user should see a {string} that the credentials are incorrect")
-    public void the_login_should_be_unsuccessful_and_the_user_should_see_a_that_the_credentials_are_incorrect(String string) {
-        Assert.assertTrue(driver.getPageSource().contains(string));
+    public void the_login_should_be_unsuccessful_and_the_user_should_see_a_that_the_credentials_are_incorrect(String errorMessage) {
+        Assert.assertTrue("Error message for invalid credentials does not match", driver.getPageSource().contains(errorMessage));
     }
 
     @When("the user leaves username and password empty")
@@ -39,19 +39,18 @@ public class StepDefinitionsLoginPage {
     }
 
     @Then("the login should be unsuccessful and the user should see a {string} that credentials are required")
-    public void theLoginShouldBeUnsuccessfulAndTheUserShouldSeeAThatCredentialsAreRequired(String arg0) {
-        Assert.assertTrue(driver.getPageSource().contains(arg0));
+    public void theLoginShouldBeUnsuccessfulAndTheUserShouldSeeAThatCredentialsAreRequired(String errorMessage) {
+        Assert.assertTrue("Error message for empty credentials does not match", driver.getPageSource().contains(errorMessage));
     }
 
     @When("the user enters valid {string} and {string}")
-    public void the_user_enters_valid_and(String string, String string2) {
-        loginPage.enterUsername(string);
-        loginPage.enterPassword(string2);
+    public void the_user_enters_valid_and(String username, String password) {
+        loginPage.enterUsername(username);
+        loginPage.enterPassword(password);
     }
 
     @Then("the login should be successful")
     public void the_login_should_be_successful() {
         productsPage.verifyLogin();
-        Assert.assertTrue(driver.findElement(By.linkText("Logout")).isDisplayed());
     }
 }

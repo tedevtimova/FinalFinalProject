@@ -1,4 +1,5 @@
 package StepDefinitions;
+
 import Pages.LoginPage;
 import Pages.ProductsPage;
 import io.cucumber.java.en.*;
@@ -6,14 +7,14 @@ import org.junit.Assert;
 
 import static Helpers.Hooks.driver;
 
-public class StepDefinitionsProductsPage {
+public class ProductsPageTests {
 
     ProductsPage productsPage = new ProductsPage(driver);
     LoginPage loginPage = new LoginPage(driver);
 
     @Given("the user has successfully logged in")
     public void the_user_has_successfully_logged_in() {
-        loginPage.succesfullLogin("standard_user","secret_sauce");
+        loginPage.succesfullLogin("standard_user", "secret_sauce");
     }
 
     @When("the user is at the Products page, they should see the Products title")
@@ -35,15 +36,17 @@ public class StepDefinitionsProductsPage {
     public void the_products_should_be_sorted_by_prices_descending_order() {
         Assert.assertTrue(productsPage.verifySortingByPriceDescending());
     }
+
     @When("the user clicks on the Add to cart button for a product")
     public void the_user_clicks_on_the_Add_to_cart_button_for_a_product() {
         productsPage.clickOnAddToCartButtonBackpackProduct();
     }
 
     @Then("the Shopping Cart badge should be {int}")
-    public void the_Shopping_Cart_badge_should_be(Integer int1) {
-                Assert.assertEquals(int1,productsPage.verifyCartBadgeQuantity());
+    public void the_Shopping_Cart_badge_should_be(Integer counter) {
+        Assert.assertEquals("Badge counter does not match", counter, productsPage.verifyCartBadgeQuantity());
     }
+
     @Then("if they add another product")
     public void if_they_add_another_product() {
         productsPage.clickOnAddToCartButtonOnesieProduct();
@@ -53,9 +56,10 @@ public class StepDefinitionsProductsPage {
     public void then_clicks_on_the_Remove_button_for_the_same_product() {
         productsPage.clickRemoveForBackPackProduct();
     }
+
     @Then("the Shopping Cart badge should be clear")
     public void the_Shopping_Cart_badge_should_be_clear() {
-      Assert.assertFalse(productsPage.verifyCartBadgePresence());
+        Assert.assertFalse("Badge counter is still present", productsPage.verifyCartBadgePresence());
     }
 
 }

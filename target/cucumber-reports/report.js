@@ -1,4 +1,4 @@
-$(document).ready(function() {var formatter = new CucumberHTML.DOMFormatter($('.cucumber-report'));formatter.uri("classpath:Features//fullScenario.feature");
+$(document).ready(function() {var formatter = new CucumberHTML.DOMFormatter($('.cucumber-report'));formatter.uri("classpath:Features//FullScenario.feature");
 formatter.feature({
   "name": "End to end test of full cycle - user logs in, adds 2 products to the basket and successfully checks out.",
   "description": "",
@@ -92,7 +92,7 @@ formatter.step({
   "keyword": "Given "
 });
 formatter.match({
-  "location": "StepDefinitions.StepDefinitionsProductsPage.the_user_has_successfully_logged_in()"
+  "location": "StepDefinitions.ProductsPageTests.the_user_has_successfully_logged_in()"
 });
 formatter.result({
   "status": "passed"
@@ -112,7 +112,7 @@ formatter.step({
   "keyword": "When "
 });
 formatter.match({
-  "location": "StepDefinitions.StepDefinitionsCheckoutPage.they_add_products_Sauce_Labs_Onesie_and_Sauce_Labs_Backpack_to_the_basket()"
+  "location": "StepDefinitions.CheckoutPageTests.they_add_products_Sauce_Labs_Onesie_and_Sauce_Labs_Backpack_to_the_basket()"
 });
 formatter.result({
   "status": "passed"
@@ -122,7 +122,7 @@ formatter.step({
   "keyword": "And "
 });
 formatter.match({
-  "location": "StepDefinitions.StepDefinitionsCheckoutPage.click_on_the_Basket_icon()"
+  "location": "StepDefinitions.CheckoutPageTests.click_on_the_Basket_icon()"
 });
 formatter.result({
   "status": "passed"
@@ -132,7 +132,7 @@ formatter.step({
   "keyword": "Then "
 });
 formatter.match({
-  "location": "StepDefinitions.StepDefinitionsCheckoutPage.they_are_redirected_to_the_Your_cart_page()"
+  "location": "StepDefinitions.CheckoutPageTests.they_are_redirected_to_the_Your_cart_page()"
 });
 formatter.result({
   "status": "passed"
@@ -142,7 +142,7 @@ formatter.step({
   "keyword": "When "
 });
 formatter.match({
-  "location": "StepDefinitions.StepDefinitionsCheckoutPage.they_click_on_the_Checkout_button()"
+  "location": "StepDefinitions.CheckoutPageTests.they_click_on_the_Checkout_button()"
 });
 formatter.result({
   "status": "passed"
@@ -152,7 +152,7 @@ formatter.step({
   "keyword": "And "
 });
 formatter.match({
-  "location": "StepDefinitions.StepDefinitionsCheckoutPage.fill_in_the_form_with_and(java.lang.String,java.lang.String,java.lang.String)"
+  "location": "StepDefinitions.CheckoutPageTests.fill_in_the_form_with_and(java.lang.String,java.lang.String,java.lang.String)"
 });
 formatter.result({
   "status": "passed"
@@ -162,7 +162,7 @@ formatter.step({
   "keyword": "And "
 });
 formatter.match({
-  "location": "StepDefinitions.StepDefinitionsCheckoutPage.click_on_the_Continue_button()"
+  "location": "StepDefinitions.CheckoutPageTests.click_on_the_Continue_button()"
 });
 formatter.result({
   "status": "passed"
@@ -172,7 +172,7 @@ formatter.step({
   "keyword": "Then "
 });
 formatter.match({
-  "location": "StepDefinitions.StepDefinitionsCheckoutPage.they_should_see_the_page_with_the_following_details_and(java.lang.String,java.lang.String,java.lang.String,java.lang.String)"
+  "location": "StepDefinitions.CheckoutPageTests.they_should_see_the_page_with_the_following_details_and(java.lang.String,java.lang.String,java.lang.String,java.lang.String)"
 });
 formatter.result({
   "status": "passed"
@@ -182,7 +182,7 @@ formatter.step({
   "keyword": "And "
 });
 formatter.match({
-  "location": "StepDefinitions.StepDefinitionsCheckoutPage.when_they_click_on_the_Finish_button()"
+  "location": "StepDefinitions.CheckoutPageTests.when_they_click_on_the_Finish_button()"
 });
 formatter.result({
   "status": "passed"
@@ -192,7 +192,7 @@ formatter.step({
   "keyword": "Then "
 });
 formatter.match({
-  "location": "StepDefinitions.StepDefinitionsCheckoutPage.they_should_see_a_success(java.lang.String)"
+  "location": "StepDefinitions.CheckoutPageTests.they_should_see_a_success(java.lang.String)"
 });
 formatter.result({
   "status": "passed"

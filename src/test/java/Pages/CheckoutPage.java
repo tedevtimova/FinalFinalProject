@@ -5,20 +5,21 @@ import io.cucumber.java.bs.A;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class CheckoutPage {
 
     private WebDriver driver;
-    By checkoutButton = By.name("checkout");
-    By firstNameField = By.name("firstName");
-    By lastNameField = By.name("lastName");
-    By zipCode = By.name("postalCode");
-    By continueButton = By.id("continue");
+    By checkoutButtonLocator = By.name("checkout");
+    By firstNameFieldLocator = By.name("firstName");
+    By lastNameFieldLocator = By.name("lastName");
+    By zipCodeLocator = By.name("postalCode");
+    By continueButtonLocator = By.id("continue");
     By itemTotal = By.className("summary_subtotal_label");
     By tax = By.className("summary_tax_label");
     By total = By.className("summary_total_label");
-    By finishButton = By.id("finish");
+    By finishButtonLocator = By.id("finish");
     By insideCartLabel = By.xpath("//span[contains(text(),'Your Cart')]");
     By checkoutOverviewLabel = By.xpath("//span[contains(text(),'Checkout: Overview')]");
     By successMessage = By.xpath("//h2[contains(text(),'Thank you for your order!')]");
@@ -27,32 +28,37 @@ public class CheckoutPage {
         this.driver = driver;
     }
 
-    public boolean verifyCartPage() {
+    public String verifyCartPage() {
         Waits.getExplicitWait(driver).until(ExpectedConditions.visibilityOfElementLocated(insideCartLabel));
-        boolean cartTitle = driver.findElement(insideCartLabel).isDisplayed();
+        String cartTitle = driver.findElement(insideCartLabel).getText();
         return cartTitle;
     }
 
     public void clickOnCheckoutButton() {
-        Assert.assertTrue(driver.findElement(checkoutButton).isEnabled());
-        driver.findElement(checkoutButton).click();
+        WebElement checkoutButton = driver.findElement(checkoutButtonLocator);
+        Assert.assertTrue("Checkout button is not present", checkoutButton.isEnabled());
+        checkoutButton.click();
     }
 
     public void fillInTheForm(String firstn, String lastn, String zip) {
-        Assert.assertTrue(driver.findElement(firstNameField).getAttribute("value").isEmpty());
-        driver.findElement(firstNameField).sendKeys(firstn);
-        Assert.assertTrue(driver.findElement(firstNameField).getAttribute("value").contains(firstn));
-        Assert.assertTrue(driver.findElement(lastNameField).getAttribute("value").isEmpty());
-        driver.findElement(lastNameField).sendKeys(lastn);
-        Assert.assertTrue(driver.findElement(lastNameField).getAttribute("value").contains(lastn));
-        Assert.assertTrue(driver.findElement(zipCode).getAttribute("value").isEmpty());
-        driver.findElement(zipCode).sendKeys(zip);
-        Assert.assertTrue(driver.findElement(zipCode).getAttribute("value").contains(zip));
+        WebElement firstNameField = driver.findElement(firstNameFieldLocator);
+        Assert.assertTrue("First name field is not displayed", firstNameField.getAttribute("value").isEmpty());
+        firstNameField.sendKeys(firstn);
+        Assert.assertTrue("First name field input does not match", firstNameField.getAttribute("value").contains(firstn));
+        WebElement lastNameField = driver.findElement(lastNameFieldLocator);
+        Assert.assertTrue("Last name field is not displayed", lastNameField.getAttribute("value").isEmpty());
+        lastNameField.sendKeys(lastn);
+        Assert.assertTrue("Last name field input does not match", lastNameField.getAttribute("value").contains(lastn));
+        WebElement zipCode = driver.findElement(zipCodeLocator);
+        Assert.assertTrue("Zip code field is not displayed", zipCode.getAttribute("value").isEmpty());
+        zipCode.sendKeys(zip);
+        Assert.assertTrue("Zip code field input does not match", zipCode.getAttribute("value").contains(zip));
     }
 
     public void clickOnContinueButton() {
-      Assert.assertTrue(driver.findElement(continueButton).isEnabled());
-        driver.findElement(continueButton).click();
+        WebElement continueButton = driver.findElement(continueButtonLocator);
+        Assert.assertTrue("Continue button is not displayed", continueButton.isEnabled());
+        continueButton.click();
     }
 
     public String verifyCheckoutOverview() {
@@ -77,8 +83,9 @@ public class CheckoutPage {
     }
 
     public void clickOnTheFinishButton() {
-        Assert.assertTrue(driver.findElement(finishButton).isEnabled());
-        driver.findElement(finishButton).click();
+        WebElement finishButton = driver.findElement(finishButtonLocator);
+        Assert.assertTrue("Finish button is not displayed", finishButton.isEnabled());
+        finishButton.click();
     }
 
     public String success() {
